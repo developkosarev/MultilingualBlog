@@ -1,13 +1,10 @@
 <?php
 
-
 namespace App\Entity\Doc\Invoice;
-
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
-
 use App\Entity\Base\BaseDoc;
 
 /**
@@ -31,11 +28,20 @@ class Invoice extends BaseDoc
      */
     protected $invoiceProducts;
 
+    /**
+     * @var ArrayCollection $accumStocks
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Accum\Stock", mappedBy="recorderInvoice", cascade={"persist"})
+     */
+    protected $accumStocks;
+
+
     public function __construct()
     {
         parent::__construct();
 
         $this->invoiceProducts = new ArrayCollection();
+        $this->accumStocks = new ArrayCollection();
     }
 
     public function getInvoiceProducts()

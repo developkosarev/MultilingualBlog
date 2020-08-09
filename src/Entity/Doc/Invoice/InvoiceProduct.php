@@ -19,7 +19,7 @@ class InvoiceProduct extends AbstractTable
     /**
      * @var Invoice
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Doc\Invoice\Invoice")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Doc\Invoice\Invoice", inversedBy="invoiceProducts")
      */
     protected $owner;
 
