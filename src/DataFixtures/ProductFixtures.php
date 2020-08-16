@@ -30,6 +30,15 @@ class ProductFixtures extends Fixture
             $this->addReference($reference, $product);
         }
 
+        for ($i = 100; $i <= 200; $i++) {
+            $name = sprintf("Product list %'.03d", $i);
+
+            $product = new Product();
+            $product->setName($name);
+
+            $manager->persist($product);
+        }
+
         $manager->flush();
     }
 

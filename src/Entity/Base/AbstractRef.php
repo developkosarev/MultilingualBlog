@@ -5,6 +5,7 @@ namespace App\Entity\Base;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Version;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 //https://its.1c.ru/db/metod8dev/content/1798/hdoc
 /**
@@ -30,10 +31,19 @@ abstract class AbstractRef
      */
     protected $marked = false;
 
-    public function getId()
+    /**
+     * @Groups({"ref:id"})
+     */
+    public function getId(): ?int
     {
         return $this->id;
     }
+
+    //public function setId($id): self
+    //{
+    //    $this->id = $id;
+    //    return $this;
+    //}
 
     public function getVersion()
     {

@@ -19,4 +19,13 @@ class AdminController extends AbstractController
     {
         return $this->render('admin/index.html.twig');
     }
+
+    /**
+     * @Route("/adminvuetify", name="admin_vuetify")
+     * @Route("/adminvuetify/{vueRouting}", name="admin_vuetify_vue")
+     */
+    public function indexVuetify()
+    {
+        return $this->render('admin/index_vuetify.html.twig');
+    }
 }

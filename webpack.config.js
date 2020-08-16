@@ -54,7 +54,11 @@ Encore
     })		
 
     // enables Sass/SCSS support
-    .enableSassLoader()
+    //.enableSassLoader()
+    .enableSassLoader(options => {
+        options.implementation = require('sass')
+        options.fiber = require('fibers')
+    })
 
     // uncomment if you use TypeScript
     //.enableTypeScriptLoader()
@@ -72,6 +76,7 @@ Encore
 
     .enableVueLoader()
     .addEntry('spa', './assets/spa/main.js')
+    .addEntry('spavuetify', './assets/spavuetify/main.js')
 ;
 
 module.exports = Encore.getWebpackConfig();

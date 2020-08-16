@@ -17,7 +17,7 @@ class InvoiceFixtures extends Fixture implements DependentFixtureInterface
     {
         //1
         $invoice = new Invoice();
-        $invoice->setId(1);
+        //$invoice->setId(1);
 
         $invoiceProduct = new InvoiceProduct();
         $invoiceProduct->setProduct($this->getReference(ProductFixtures::PRODUCT1_REFERENCE));
@@ -39,7 +39,7 @@ class InvoiceFixtures extends Fixture implements DependentFixtureInterface
 
         //2
         $invoice = new Invoice();
-        $invoice->setId(2);
+        //$invoice->setId(2);
 
         $invoiceProduct = new InvoiceProduct();
         $invoiceProduct->setProduct($this->getReference(ProductFixtures::PRODUCT1_REFERENCE));
