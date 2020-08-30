@@ -20,6 +20,8 @@ class ProductRepository extends BaseRefRepository
     public function findLatest(int $page = 1, int $size = 25): Paginator
     {
         $qb = $this->createQueryBuilder('p')
+            ->select('p')
+            ->addSelect('2 AS testSum')
             ->orderBy('p.name', 'DESC')
         ;
 

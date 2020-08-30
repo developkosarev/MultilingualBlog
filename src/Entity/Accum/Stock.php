@@ -36,8 +36,8 @@ class Stock extends AbstractAccum
     /**
      * @var Product
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Ref\Product\Product")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ref\Product\Product",  inversedBy="stocks")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false)
      */
     private $product;
 

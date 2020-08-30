@@ -12,13 +12,13 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class BaseAccumRepository extends ServiceEntityRepository
 {
-    private $em;
+    //private $em;
 
     protected $accumEntityName;
 
     public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
     {
-        $this->em = $entityManager;
+        //$this->em = $entityManager;
 
         parent::__construct($registry, $this->accumEntityName);
     }
@@ -45,14 +45,14 @@ class BaseAccumRepository extends ServiceEntityRepository
 
     public function add(AbstractAccum $accum)
     {
-        $this->em->persist($accum);
+        $this->_em->persist($accum);
     }
 
     public function delete(BaseDoc $doc)
     {
         $records = $this->getRecords($doc);
         foreach ($records as $item) {
-            $this->em->remove($item);
+            $this->_em->remove($item);
         }
     }
 
@@ -60,10 +60,10 @@ class BaseAccumRepository extends ServiceEntityRepository
     {
         $this->em->getConnection()->beginTransaction();
         try {
-            $this->em->flush();
-            $this->em->getConnection()->commit();
+            $this->_em->flush();
+            $this->_em->getConnection()->commit();
         } catch (Exception $e) {
-            $this->em->getConnection()->rollBack();
+            $this->_em->getConnection()->rollBack();
             throw $e;
         }
     }

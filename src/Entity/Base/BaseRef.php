@@ -4,6 +4,7 @@ namespace App\Entity\Base;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\MappedSuperclass
@@ -12,6 +13,7 @@ abstract class BaseRef extends AbstractRef
 {
     /**
      * @ORM\Column(name="name", type="string", length=50, nullable=false)
+     * @Assert\NotBlank()
      */
     protected $name;
 
