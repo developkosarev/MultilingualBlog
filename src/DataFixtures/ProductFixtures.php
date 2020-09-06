@@ -5,7 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Ref\Product\Product;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-
+use Doctrine\ORM\Mapping\ClassMetadata;
 
 class ProductFixtures extends Fixture
 {
@@ -20,8 +20,11 @@ class ProductFixtures extends Fixture
 
     private function loadProducts(ObjectManager $manager): void
     {
-        foreach ($this->getProducts() as [$name, $reference]) {
+        $manager->getClassMetadata(Product::class)->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
+
+        foreach ($this->getProducts() as [$id, $name, $reference]) {
             $product = new Product();
+            $product->setId($id);
             $product->setName($name);
 
             $manager->persist($product);
@@ -29,6 +32,10 @@ class ProductFixtures extends Fixture
 
             $this->addReference($reference, $product);
         }
+
+        $manager->flush();
+
+        $manager->getClassMetadata(Product::class)->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_AUTO);
 
         for ($i = 100; $i <= 200; $i++) {
             $name = sprintf("Product list %'.03d", $i);
@@ -45,9 +52,9 @@ class ProductFixtures extends Fixture
     private function getProducts(): array
     {
         return [
-            ['Product 001', self::PRODUCT1_REFERENCE],
-            ['Product 002', self::PRODUCT2_REFERENCE],
-            ['Product 003', self::PRODUCT3_REFERENCE],
+            [1, 'Product 001', self::PRODUCT1_REFERENCE],
+            [2, 'Product 002', self::PRODUCT2_REFERENCE],
+            [3, 'Product 003', self::PRODUCT3_REFERENCE],
         ];
     }
 }

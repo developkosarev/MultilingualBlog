@@ -58,7 +58,7 @@ class BaseAccumRepository extends ServiceEntityRepository
 
     public function save()
     {
-        $this->em->getConnection()->beginTransaction();
+        $this->_em->getConnection()->beginTransaction();
         try {
             $this->_em->flush();
             $this->_em->getConnection()->commit();

@@ -30,5 +30,19 @@ abstract class AbstractAccumTotal
     public function __construct()
     {
         $this->period = new \DateTime(AbstractAccumTotal::CURRENT_DATE);
+        $this->fillResources();
+    }
+
+    abstract public function getDimensions(): array;
+
+    abstract public function getResources(): array;
+
+    public function fillResources()
+    {
+        $resources = $this->getResources();
+
+        foreach ($resources as $resource) {
+            $this->$resource = 0;
+        }
     }
 }

@@ -2,11 +2,10 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Ref\Product\Product;
 use App\Entity\Ref\Warehouse\Warehouse;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\Persistence\ObjectManager;
-
 
 class WarehouseFixtures extends Fixture
 {
@@ -21,8 +20,11 @@ class WarehouseFixtures extends Fixture
 
     private function loadWarehouses(ObjectManager $manager): void
     {
-        foreach ($this->getWarehouses() as [$name, $reference]) {
+        $manager->getClassMetadata(Warehouse::class)->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
+
+        foreach ($this->getWarehouses() as [$id, $name, $reference]) {
             $warehouse = new Warehouse();
+            $warehouse->setId($id);
             $warehouse->setName($name);
 
             $manager->persist($warehouse);
@@ -37,9 +39,9 @@ class WarehouseFixtures extends Fixture
     private function getWarehouses(): array
     {
         return [
-            ['Warehouse 001', self::WAREHOUSE1_REFERENCE],
-            ['Warehouse 002', self::WAREHOUSE2_REFERENCE],
-            ['Warehouse 003', self::WAREHOUSE3_REFERENCE],
+            [1, 'Warehouse 001', self::WAREHOUSE1_REFERENCE],
+            [2, 'Warehouse 002', self::WAREHOUSE2_REFERENCE],
+            [3, 'Warehouse 003', self::WAREHOUSE3_REFERENCE],
         ];
     }
 }

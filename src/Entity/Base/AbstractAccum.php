@@ -42,7 +42,11 @@ abstract class AbstractAccum
         $this->fillResources();
     }
 
+    abstract public function getDimensions(): array;
+
     abstract public function getResources(): array;
+
+    abstract public function getAccumTotal();
 
     abstract public static function getRecorders(): array;
 
@@ -82,5 +86,4 @@ abstract class AbstractAccum
             $this->$resource = 0;
         }
     }
-
 }

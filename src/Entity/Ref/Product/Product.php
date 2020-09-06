@@ -2,6 +2,7 @@
 
 namespace App\Entity\Ref\Product;
 
+use App\Entity\Accum\Cost;
 use App\Entity\Base\BaseRef;
 use App\Entity\Accum\Stock;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -22,6 +23,13 @@ class Product extends BaseRef
      */
     private $stocks;
 
+    /**
+     * @var Cost
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Accum\Cost", mappedBy="product")
+     */
+    private $costs;
+
     public function __construct()
     {
         $this->stocks = new ArrayCollection();
@@ -41,5 +49,21 @@ class Product extends BaseRef
     public function setStocks(Stock $stocks): void
     {
         $this->stocks = $stocks;
+    }
+
+    /**
+     * @return Cost
+     */
+    public function getCosts(): Cost
+    {
+        return $this->costs;
+    }
+
+    /**
+     * @param Cost $costs
+     */
+    public function setCosts(Cost $costs): void
+    {
+        $this->costs = $costs;
     }
 }

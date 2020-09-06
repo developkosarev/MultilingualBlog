@@ -11,10 +11,10 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
  * @Entity
- * @ORM\Table(name="accum_stock_total",
- *  uniqueConstraints={@UniqueConstraint(name="dimensions_idx", columns={"period", "product_id", "warehouse_id"})})
+ * @ORM\Table(name="accum_cost_total",
+ *  uniqueConstraints={@UniqueConstraint(name="dimensions_idx", columns={"period", "product_id"})})
  */
-class StockTotal extends AbstractAccumTotal
+class CostTotal extends AbstractAccumTotal
 {
     #region Dimensions
 
@@ -25,14 +25,6 @@ class StockTotal extends AbstractAccumTotal
      * @ORM\JoinColumn(nullable=false)
      */
     private $product;
-
-    /**
-     * @var Warehouse
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Ref\Warehouse\Warehouse")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $warehouse;
 
     #endregion
 
@@ -48,9 +40,9 @@ class StockTotal extends AbstractAccumTotal
     /**
      * @var float
      *
-     * @ORM\Column(type="decimal", scale=3, nullable=false, name="reserved_quantity")
+     * @ORM\Column(type="decimal", scale=2, nullable=false, name="cost")
      */
-    protected $reservedQuantity;
+    protected $cost;
 
     #endregion
 
@@ -68,22 +60,6 @@ class StockTotal extends AbstractAccumTotal
     public function setProduct(Product $product): void
     {
         $this->product = $product;
-    }
-
-    /**
-     * @return Warehouse
-     */
-    public function getWarehouse(): Warehouse
-    {
-        return $this->warehouse;
-    }
-
-    /**
-     * @param Warehouse $warehouse
-     */
-    public function setWarehouse(Warehouse $warehouse): void
-    {
-        $this->warehouse = $warehouse;
     }
 
     /**
@@ -105,26 +81,26 @@ class StockTotal extends AbstractAccumTotal
     /**
      * @return float
      */
-    public function getReservedQuantity(): float
+    public function getCost(): float
     {
-        return $this->reservedQuantity;
+        return $this->cost;
     }
 
     /**
-     * @param float $reservedQuantity
+     * @param float $cost
      */
-    public function setReservedQuantity(float $reservedQuantity): void
+    public function setCost(float $cost): void
     {
-        $this->reservedQuantity = $reservedQuantity;
+        $this->cost = $cost;
     }
 
     public function getDimensions(): array
     {
-        return ['product', 'warehouse'];
+        return ['product'];
     }
 
     public function getResources(): array
     {
-        return ['quantity', 'reservedQuantity'];
+        return ['quantity', 'cost'];
     }
 }

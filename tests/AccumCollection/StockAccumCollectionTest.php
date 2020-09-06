@@ -1,70 +1,86 @@
 <?php
 
-namespace App\Tests\Document;
+namespace App\Tests\AccumCollection;
 
 use App\AccumCollection\StockAccumCollection;
-
-use App\Entity\Accum\Stock\Stock;
-use Doctrine\ORM\EntityManager;
+use App\Entity\Accum\Stock;
+use App\Entity\Ref\Product\Product;
+use App\Entity\Ref\Warehouse\Warehouse;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-
-//https://www.thinktocode.com/
-//https://www.thinktocode.com/2018/03/05/repository-pattern-symfony/
 
 class StockAccumCollectionTest extends KernelTestCase
 {
-    /**
-     * @var EntityManager
-     */
-    private $entityManager;
-
-    protected function setUp(): void
+    public function testTotalOneItemAccumCollection(): void
     {
-        $kernel = self::bootKernel();
+        $warehouse001 = new Warehouse();
+        $warehouse001->setId(1);
 
-        $this->entityManager = $kernel->getContainer()
-            ->get('doctrine')
-            ->getManager();
+        $product001 = new Product();
+        $product001->setId(1);
+
+        $product002 = new Product();
+        $product002->setId(2);
+
+        $stockAccumCollection = new StockAccumCollection();
+
+        $stock = new Stock();
+        $stock->setPeriod(new \DateTime());
+        $stock->setDebit();
+        $stock->setWarehouse($warehouse001);
+        $stock->setProduct($product001);
+        $stock->setQuantity(1);
+
+        $stockAccumCollection->add($stock);
+
+        $stock = new Stock();
+        $stock->setPeriod(new \DateTime());
+        $stock->setDebit();
+        $stock->setWarehouse($warehouse001);
+        $stock->setProduct($product001);
+        $stock->setQuantity(1);
+
+        $stockAccumCollection->add($stock);
+
+        $this->assertCount(1, $stockAccumCollection->getItemsTotal());
+
+        $stockTotal = $stockAccumCollection->getItemsTotal()->first();
+        $this->assertSame(2.000, $stockTotal->getQuantity());
     }
 
-    public function testSaveStockAccumCollection(): void
+    public function testTotalTwoItemAccumCollection(): void
     {
-//        $stockAccumCollection = new StockAccumCollection();
-//        $stockAccumCollection->setRecorder();
-//
-//        $stock = new Stock();
-//        $stock->setDebit();
-//        $stock->setProduct();
-//        $stock->setWarehouse();
-//        $stock->setQuantity(1);
-//
-//        $stockAccumCollection->add($stock);
-//
-//        $stock = new Stock();
-//        $stock->setKredit();
-//        $stock->setProduct();
-//        $stock->setWarehouse();
-//        $stock->setReservedQuantity(1);
-//
-//        $stockAccumCollection->add($stock);
-//
-//        $stockAccumCollection->Save();
+        $warehouse001 = new Warehouse();
+        $warehouse001->setId(1);
 
+        $product001 = new Product();
+        $product001->setId(1);
 
-        //$invoice = $this->entityManager
-        //    ->getRepository(Invoice::class)
-        //    ->find($invoice->getId());
+        $product002 = new Product();
+        $product002->setId(2);
 
-        //$this->assertSame(1, $invoice->getVersion());
-        $this->assertSame(1, 1);
-    }
+        $stockAccumCollection = new StockAccumCollection();
 
-    protected function tearDown(): void
-    {
-        parent::tearDown();
+        $stock = new Stock();
+        $stock->setPeriod(new \DateTime());
+        $stock->setDebit();
+        $stock->setWarehouse($warehouse001);
+        $stock->setProduct($product001);
+        $stock->setQuantity(1);
 
-        // doing this is recommended to avoid memory leaks
-        $this->entityManager->close();
-        $this->entityManager = null;
+        $stockAccumCollection->add($stock);
+
+        $stock = new Stock();
+        $stock->setPeriod(new \DateTime());
+        $stock->setDebit();
+        $stock->setWarehouse($warehouse001);
+        $stock->setProduct($product002);
+        $stock->setQuantity(1);
+
+        $stockAccumCollection->add($stock);
+
+        $this->assertCount(2, $stockAccumCollection->getItemsTotal());
+
+        $stockTotal = $stockAccumCollection->getItemsTotal()->first();
+        $this->assertSame(1.000, $stockTotal->getQuantity());
     }
 }

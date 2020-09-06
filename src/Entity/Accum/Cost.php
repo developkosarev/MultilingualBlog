@@ -5,24 +5,22 @@ namespace App\Entity\Accum;
 use App\Entity\Doc\Invoice\Invoice;
 use App\Entity\Doc\Order\Order;
 use App\Entity\Ref\Product\Product;
-use App\Entity\Ref\Warehouse\Warehouse;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
 use App\Entity\Base\AbstractAccum;
 
 /**
  * @Entity
- * @ORM\Entity(repositoryClass="App\Repository\StockRepository")
- * @ORM\Table(name="accum_stock")
+ * @ORM\Table(name="accum_cost")
  */
-class Stock extends AbstractAccum
+class Cost extends AbstractAccum
 {
     #region Recorders
 
     /**
      * @var Invoice
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Doc\Invoice\Invoice", inversedBy="accumStocks")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Doc\Invoice\Invoice", inversedBy="accumCosts")
      * @ORM\JoinColumn(nullable=true, name="recorder_invoice_id")
      */
     private $recorderInvoice;
@@ -30,7 +28,7 @@ class Stock extends AbstractAccum
     /**
      * @var Order
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Doc\Order\Order", inversedBy="accumStocks")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Doc\Order\Order", inversedBy="accumCosts")
      * @ORM\JoinColumn(nullable=true, name="recorder_order_id")
      */
     private $recorderOrder;
@@ -42,18 +40,10 @@ class Stock extends AbstractAccum
     /**
      * @var Product
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Ref\Product\Product",  inversedBy="stocks")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ref\Product\Product",  inversedBy="costs")
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false)
      */
     private $product;
-
-    /**
-     * @var Warehouse
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Ref\Warehouse\Warehouse")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $warehouse;
 
     #endregion
 
@@ -69,9 +59,9 @@ class Stock extends AbstractAccum
     /**
      * @var float
      *
-     * @ORM\Column(type="decimal", scale=3, nullable=false, name="reserved_quantity")
+     * @ORM\Column(type="decimal", scale=2, nullable=false, name="cost")
      */
-    protected $reservedQuantity;
+    protected $cost;
 
     #endregion
 
@@ -124,22 +114,6 @@ class Stock extends AbstractAccum
     }
 
     /**
-     * @return Warehouse
-     */
-    public function getWarehouse(): Warehouse
-    {
-        return $this->warehouse;
-    }
-
-    /**
-     * @param Warehouse $warehouse
-     */
-    public function setWarehouse(Warehouse $warehouse): void
-    {
-        $this->warehouse = $warehouse;
-    }
-
-    /**
      * @return float
      */
     public function getQuantity(): float
@@ -158,32 +132,32 @@ class Stock extends AbstractAccum
     /**
      * @return float
      */
-    public function getReservedQuantity(): float
+    public function getCost(): float
     {
-        return $this->reservedQuantity;
+        return $this->cost;
     }
 
     /**
-     * @param float $reservedQuantity
+     * @param float $cost
      */
-    public function setReservedQuantity(float $reservedQuantity): void
+    public function setCost(float $cost): void
     {
-        $this->reservedQuantity = $reservedQuantity;
+        $this->cost = $cost;
     }
 
     public function getDimensions(): array
     {
-        return ['product', 'warehouse'];
+        return ['product'];
     }
 
     public function getResources(): array
     {
-        return ['quantity', 'reservedQuantity'];
+        return ['quantity', 'cost'];
     }
 
     public function getAccumTotal()
     {
-        return StockTotal::class;
+        return CostTotal::class;
     }
 
     public static function getRecorders(): array

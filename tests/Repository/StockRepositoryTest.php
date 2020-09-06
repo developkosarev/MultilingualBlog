@@ -9,6 +9,9 @@ use App\Entity\Ref\Warehouse\Warehouse;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+//https://www.thinktocode.com/
+//https://www.thinktocode.com/2018/03/05/repository-pattern-symfony/
+
 class StockRepositoryTest extends KernelTestCase
 {
     /**

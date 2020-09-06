@@ -9,12 +9,8 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class InvoiceRepository extends ServiceEntityRepository
 {
-    private $entityManager;
-
-    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
+    public function __construct(ManagerRegistry $registry)
     {
-        $this->entityManager = $entityManager;
-
         parent::__construct($registry, Invoice::class);
     }
 
@@ -25,7 +21,7 @@ class InvoiceRepository extends ServiceEntityRepository
             $invoice->setTotalSum($invoice->getTotalSum() + $item->getSum());
         }
 
-        $this->entityManager->persist($invoice);
-        $this->entityManager->flush();
+        $this->_em->persist($invoice);
+        $this->_em->flush();
     }
 }

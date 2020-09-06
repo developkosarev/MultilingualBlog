@@ -20,10 +20,18 @@ class Order extends BaseDoc
      */
     protected $accumStocks;
 
+    /**
+     * @var ArrayCollection $accumCosts
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Accum\Cost", mappedBy="recorderOrder", cascade={"persist"})
+     */
+    protected $accumCosts;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->accumStocks = new ArrayCollection();
+        $this->accumCosts = new ArrayCollection();
     }
 }

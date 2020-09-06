@@ -39,11 +39,11 @@ abstract class AbstractRef
         return $this->id;
     }
 
-    //public function setId($id): self
-    //{
-    //    $this->id = $id;
-    //    return $this;
-    //}
+    public function setId($id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
 
     public function getVersion()
     {

@@ -35,6 +35,13 @@ class Invoice extends BaseDoc
      */
     protected $accumStocks;
 
+    /**
+     * @var ArrayCollection $accumCosts
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Accum\Cost", mappedBy="recorderInvoice", cascade={"persist"})
+     */
+    protected $accumCosts;
+
 
     public function __construct()
     {
@@ -42,6 +49,7 @@ class Invoice extends BaseDoc
 
         $this->invoiceProducts = new ArrayCollection();
         $this->accumStocks = new ArrayCollection();
+        $this->accumCosts = new ArrayCollection();
     }
 
     public function getInvoiceProducts()
