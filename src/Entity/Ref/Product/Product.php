@@ -2,6 +2,7 @@
 
 namespace App\Entity\Ref\Product;
 
+use App\Base\Interfaces\CodeRefInterface;
 use App\Entity\Accum\Cost;
 use App\Entity\Base\BaseRef;
 use App\Entity\Accum\Stock;
@@ -14,8 +15,13 @@ use Doctrine\ORM\Mapping\Entity;
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
  * @ORM\Table(name="ref_product")
  */
-class Product extends BaseRef
+class Product extends BaseRef implements CodeRefInterface
 {
+    /**
+     * @ORM\Column(name="code", type="string", length=10, nullable=false)
+     */
+    private $code;
+
     /**
      * @var Stock
      *
@@ -33,6 +39,16 @@ class Product extends BaseRef
     public function __construct()
     {
         $this->stocks = new ArrayCollection();
+    }
+
+    public function getCode(): string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code)
+    {
+        $this->code = $code;
     }
 
     /**

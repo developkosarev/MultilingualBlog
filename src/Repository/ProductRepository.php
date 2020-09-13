@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Ref\Product\Product;
 use App\Pagination\Paginator;
-use App\Repository\Base\BaseRefRepository;
+use App\Base\Repository\BaseRefRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 

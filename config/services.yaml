@@ -20,7 +20,7 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php,Repository/Base}'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -30,3 +30,20 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    #doctrine.orm.custom_repository_factory:
+    #    class: App\Base\RepositoryFactory\CustomRepositoryFactory
+    #    #arguments:
+        #    - '@app.another_command_handler_locator'
+
+    #region CodeGenerator
+    #https://symfony.com/doc/current/service_container/autowiring.html#working-with-interfaces
+    #
+    app.code.generator.default:
+        class: App\Base\Services\CodeGeneratorDefault
+
+    app.code.generator.hash:
+        class: App\Base\Services\CodeGeneratorHash
+
+    App\Base\Interfaces\CodeGeneratorInterface: '@app.code.generator.default'
+    #endregion

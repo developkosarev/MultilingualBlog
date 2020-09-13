@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Repository\Base;
+namespace App\Base\Repository;
 
 use App\Entity\Base\AbstractAccumTotal;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+
 
 class BaseAccumTotalRepository extends ServiceEntityRepository
 {
@@ -13,9 +14,11 @@ class BaseAccumTotalRepository extends ServiceEntityRepository
 
     private $updateQuery;
 
-    public function __construct(ManagerRegistry $registry, $entityClass)
+    public function __construct(ManagerRegistry $registry)
     {
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
+
+        $entityClass = AbstractAccumTotal::class; //???
 
         parent::__construct($registry, $entityClass);
     }

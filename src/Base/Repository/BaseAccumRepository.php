@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repository\Base;
+namespace App\Base\Repository;
 
 use App\Entity\Base\AbstractAccum;
 use App\Entity\Base\BaseDoc;
@@ -12,14 +12,10 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class BaseAccumRepository extends ServiceEntityRepository
 {
-    //private $em;
-
     protected $accumEntityName;
 
-    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
+    public function __construct(ManagerRegistry $registry)
     {
-        //$this->em = $entityManager;
-
         parent::__construct($registry, $this->accumEntityName);
     }
 

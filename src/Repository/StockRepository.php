@@ -5,7 +5,7 @@ namespace App\Repository;
 use App\Entity\Accum\Stock;
 use App\Entity\Ref\Product\Product;
 use App\Entity\Ref\Warehouse\Warehouse;
-use App\Repository\Base\BaseAccumRepository;
+use App\Base\Repository\BaseAccumRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;

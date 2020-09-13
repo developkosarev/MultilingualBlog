@@ -2,11 +2,22 @@
 
 namespace App\Controller;
 
+use App\Base\RepositoryFactory\CustomRepositoryFactory;
+use App\Base\Services\CodeGeneratorDefault;
+use App\Entity\Doc\Invoice\Invoice;
+use Doctrine\ORM\Repository\RepositoryFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
 {
+    private $factory = null;
+
+    //public function __construct(RepositoryFactory $factory)
+    //{
+    //    $this->factory = $factory;
+    //}
+
     /**
      * @Route("/", name="default")
      */
@@ -32,8 +43,21 @@ class DefaultController extends AbstractController
      *   "de": "/test"
      * }, name="test")
      */
-    public function test()
+    public function test(CustomRepositoryFactory $ref)
     {
-        return $this->render('default/test.html.twig');
+        $this->factory = $ref;
+
+        //Symfony\Component\DependencyInjection\ServiceLocator
+        //$referralService = $this->get('doctrine.orm.container_repository_factory');
+        //$referralService = $this->get('doctrine.orm.custom_repository_factory');
+
+        $repository = $this->getDoctrine()->getRepository(Invoice::class);
+
+        return $this->render(
+            'default/test.html.twig',
+            [
+                'factory' => $this->factory
+            ]
+        );
     }
 }

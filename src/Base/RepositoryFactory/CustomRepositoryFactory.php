@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Base\Repository;
+namespace App\Base\RepositoryFactory;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\ServiceRepositoryCompilerPass;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Repository\RepositoryFactory;
@@ -47,6 +48,7 @@ final class CustomRepositoryFactory implements RepositoryFactory
         $customRepositoryName = $metadata->customRepositoryClassName;
         if ($customRepositoryName !== null) {
             // fetch from the container
+            var_dump($this->container);
             if ($this->container && $this->container->has($customRepositoryName)) {
                 $repository = $this->container->get($customRepositoryName);
 
@@ -58,9 +60,9 @@ final class CustomRepositoryFactory implements RepositoryFactory
             }
 
             // if not in the container but the class/id implements the interface, throw an error
-            //if (is_a($customRepositoryName, ServiceEntityRepositoryInterface::class, true)) {
-            //    throw new RuntimeException(sprintf('The "%s" entity repository implements "%s", but its service could not be found. Make sure the service exists and is tagged with "%s".', $customRepositoryName, ServiceEntityRepositoryInterface::class, ServiceRepositoryCompilerPass::REPOSITORY_SERVICE_TAG));
-            //}
+            if (is_a($customRepositoryName, ServiceEntityRepositoryInterface::class, true)) {
+                throw new RuntimeException(sprintf('The "%s" entity repository implements "%s", but its service could not be found. Make sure the service exists and is tagged with "%s".', $customRepositoryName, ServiceEntityRepositoryInterface::class, ServiceRepositoryCompilerPass::REPOSITORY_SERVICE_TAG));
+            }
 
             if (! class_exists($customRepositoryName)) {
                 throw new RuntimeException(sprintf('The "%s" entity has a repositoryClass set to "%s", but this is not a valid class. Check your class naming. If this is meant to be a service id, make sure this service exists and is tagged with "%s".', $metadata->name, $customRepositoryName, ServiceRepositoryCompilerPass::REPOSITORY_SERVICE_TAG));

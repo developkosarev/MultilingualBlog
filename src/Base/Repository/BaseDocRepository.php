@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Repository\Base;
+namespace App\Base\Repository;
 
 
 use App\Entity\Base\BaseDoc;
