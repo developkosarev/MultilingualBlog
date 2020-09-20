@@ -10,7 +10,7 @@ jobs:
       - image: circleci/php:7.2.4-apache-stretch-node-browsers
         enviroment:
           APP_ENV: test
-          DATABASE_URL: mysql://root:@127.0.0.1:3306/symfony002blog?serverVersion=5.7
+          DATABASE_URL: mysql://root:@127.0.0.1/symfony002blog?serverVersion=5.7
           MAILER_FROM: admin@admin.com
           MAILER_URL: null://localhost
       - image: circleci/mysql:5.7
@@ -29,6 +29,21 @@ jobs:
 
     steps:
       - checkout
+      - run:
+          name: Install PHP MySQL
+          command: sudo docker-php-ext-install pdo_mysql
+      - run:
+          name: Wait for MySQL
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
+      - run:
+          name: Composer
+          command: sudo composer self-update
+      - run:
+          name: Composer install
+          command: composer install -n --prefer-dist
+      - run:
+          name: Run migration
+          command: php bin/console doctrine:migrations:migrate --env=test --no-interaction
 
       #- run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
       #- run: sudo docker-php-ext-install zip
