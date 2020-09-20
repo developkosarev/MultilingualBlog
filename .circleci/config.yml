@@ -40,7 +40,7 @@ jobs:
           command: sudo composer self-update
       - run:
           name: Composer install
-          command: composer install -n --prefer-dist
+          command: composer install -n --prefer-dist --ignore-platform-reqs
       - run:
           name: Run migration
           command: php bin/console doctrine:migrations:migrate --env=test --no-interaction
