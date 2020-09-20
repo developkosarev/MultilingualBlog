@@ -42,6 +42,9 @@ jobs:
           name: Composer install
           command: composer install -n --prefer-dist --ignore-platform-reqs
       - run:
+          name: Create database
+          command: php bin/console doctrine:database:create --env=test --no-interaction
+      - run:
           name: Run migration
           command: php bin/console doctrine:migrations:migrate --env=test --no-interaction
 
