@@ -5,7 +5,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/lic
+    #working_directory: ~/lic
     docker:
       - image: circleci/php:7.2-apache-node-browsers
         enviroment:
@@ -38,6 +38,13 @@ jobs:
       - run:
           name: Composer
           command: sudo composer self-update
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            # "composer.lock" can be used if it is committed to the repo
+            - v1-dependencies-{{ checksum "composer.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
       - run:
           name: Composer install
           command: composer install -n --prefer-dist --ignore-platform-reqs
@@ -54,7 +61,7 @@ jobs:
           name: Run tests
           command: ./vendor/bin/phpunit --testdox #./vendor/bin/phpunit --configuration app/phpunit.xml.dist --colors --verbose --testdox
 
-          
+
       #- run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
       #- run: sudo docker-php-ext-install zip
 
