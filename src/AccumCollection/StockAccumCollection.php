@@ -2,7 +2,7 @@
 
 namespace App\AccumCollection;
 
-use App\AccumCollection\Base\AbstractAccumCollection;
+use App\Base\AccumCollection\AbstractAccumCollection;
 
 class StockAccumCollection extends AbstractAccumCollection
 {

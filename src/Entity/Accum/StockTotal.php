@@ -11,11 +11,12 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
  * @Entity
- * @ORM\Table(name="accum_stock_total",
- *  uniqueConstraints={@UniqueConstraint(name="dimensions_idx", columns={"period", "product_id", "warehouse_id"})})
+ * @ORM\Entity(repositoryClass="App\Repository\StockTotalRepository")
+ * @ORM\Table(name="accum_stock_total")
  */
 class StockTotal extends AbstractAccumTotal
 {
+    //*  uniqueConstraints={@UniqueConstraint(name="dimensions_idx", columns={"period", "product_id", "warehouse_id"})})
     #region Dimensions
 
     /**

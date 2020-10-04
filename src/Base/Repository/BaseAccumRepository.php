@@ -44,6 +44,11 @@ class BaseAccumRepository extends ServiceEntityRepository
         $this->_em->persist($accum);
     }
 
+    public function remove(AbstractAccum $accum)
+    {
+        $this->_em->remove($accum);
+    }
+
     public function delete(BaseDoc $doc)
     {
         $records = $this->getRecords($doc);

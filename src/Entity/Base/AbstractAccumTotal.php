@@ -3,8 +3,6 @@
 namespace App\Entity\Base;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\Column;
-use Doctrine\ORM\Mapping\Version;
 
 /**
  * @ORM\MappedSuperclass
@@ -23,7 +21,7 @@ abstract class AbstractAccumTotal
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime", nullable=false)
+     * @ORM\Column(name="period_date", type="datetime", nullable=false)
      */
     private $period;
 

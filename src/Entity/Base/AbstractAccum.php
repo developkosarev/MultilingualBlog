@@ -2,10 +2,7 @@
 
 namespace App\Entity\Base;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\Column;
-use Doctrine\ORM\Mapping\Version;
 
 /**
  * @ORM\MappedSuperclass
@@ -22,7 +19,7 @@ abstract class AbstractAccum
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime", nullable=false)
+     * @ORM\Column(name="period", type="datetime", nullable=false)
      */
     private $period;
 

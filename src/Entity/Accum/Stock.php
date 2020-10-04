@@ -2,13 +2,13 @@
 
 namespace App\Entity\Accum;
 
+use App\Entity\Base\AbstractAccum;
 use App\Entity\Doc\Invoice\Invoice;
 use App\Entity\Doc\Order\Order;
 use App\Entity\Ref\Product\Product;
 use App\Entity\Ref\Warehouse\Warehouse;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
-use App\Entity\Base\AbstractAccum;
 
 /**
  * @Entity

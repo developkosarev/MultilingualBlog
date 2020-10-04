@@ -4,18 +4,17 @@ namespace App\Entity\Accum;
 
 use App\Entity\Base\AbstractAccumTotal;
 use App\Entity\Ref\Product\Product;
-use App\Entity\Ref\Warehouse\Warehouse;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
  * @Entity
- * @ORM\Table(name="accum_cost_total",
- *  uniqueConstraints={@UniqueConstraint(name="dimensions_idx", columns={"period", "product_id"})})
+ * @ORM\Table(name="accum_cost_total")
  */
 class CostTotal extends AbstractAccumTotal
 {
+    //*  uniqueConstraints={@UniqueConstraint(name="dimensions_idx", columns={"period", "product_id"})})
     #region Dimensions
 
     /**

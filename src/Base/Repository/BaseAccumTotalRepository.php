@@ -2,11 +2,11 @@
 
 namespace App\Base\Repository;
 
+use App\Entity\Accum\StockTotal;
 use App\Entity\Base\AbstractAccumTotal;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-
 
 class BaseAccumTotalRepository extends ServiceEntityRepository
 {
@@ -18,7 +18,7 @@ class BaseAccumTotalRepository extends ServiceEntityRepository
     {
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
 
-        $entityClass = AbstractAccumTotal::class; //???
+        $entityClass = StockTotal::class; //???
 
         parent::__construct($registry, $entityClass);
     }

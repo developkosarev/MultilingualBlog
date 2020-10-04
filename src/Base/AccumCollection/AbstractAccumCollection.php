@@ -1,6 +1,6 @@
 <?php
 
-namespace App\AccumCollection\Base;
+namespace App\Base\AccumCollection;
 
 use App\Entity\Base\AbstractAccum;
 use Doctrine\Common\Collections\ArrayCollection;

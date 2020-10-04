@@ -51,7 +51,7 @@ class StockRepositoryTest extends KernelTestCase
         $stock->setRecorderInvoice($invoice);
         $stock->setWarehouse($warehouse);
         $stock->setProduct($product);
-        $stock->setReservedQuantity(1);
+        $stock->setReservedQuantity(2);
 
         $this->stockRepository->add($stock);
 
@@ -95,7 +95,7 @@ class StockRepositoryTest extends KernelTestCase
         $stock->setRecorderInvoice($invoice);
         $stock->setWarehouse($warehouse2);
         $stock->setProduct($product);
-        $stock->setQuantity(1);
+        $stock->setQuantity(2);
 
         $this->stockRepository->add($stock);
 
