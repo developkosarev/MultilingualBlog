@@ -7,17 +7,16 @@ use App\Entity\Ref\Product\Product;
 use App\Entity\Ref\Warehouse\Warehouse;
 use App\Base\Repository\BaseAccumRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\Query\ResultSetMappingBuilder;
 
 class StockRepository extends BaseAccumRepository
 {
-    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
+    public function __construct(ManagerRegistry $registry)
     {
         $this->accumEntityName = Stock::class;
 
-        parent::__construct($registry, $entityManager);
+        parent::__construct($registry);
     }
 
     public function getTotal()

@@ -3,14 +3,14 @@
 namespace App\Repository;
 
 use App\Base\Repository\BaseAccumTotalRepository;
-use App\Entity\Accum\StockTotal;
+use App\Entity\Accum\CostTotal;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
-class StockTotalRepository extends BaseAccumTotalRepository
+class CostTotalRepository extends BaseAccumTotalRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        $this->accumEntityName = StockTotal::class;
+        $this->accumEntityName = CostTotal::class;
 
         parent::__construct($registry);
     }

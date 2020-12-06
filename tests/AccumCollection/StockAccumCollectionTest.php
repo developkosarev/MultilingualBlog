@@ -8,6 +8,8 @@ use App\Entity\Ref\Product\Product;
 use App\Entity\Ref\Warehouse\Warehouse;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+//https://habr.com/ru/post/518242/
+
 class StockAccumCollectionTest extends KernelTestCase
 {
     public function testTotalOneItemAccumCollection(): void

@@ -14,13 +14,13 @@ class BaseAccumTotalRepository extends ServiceEntityRepository
 
     private $updateQuery;
 
+    protected $accumEntityName;
+
     public function __construct(ManagerRegistry $registry)
     {
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
 
-        $entityClass = StockTotal::class; //???
-
-        parent::__construct($registry, $entityClass);
+        parent::__construct($registry, $this->accumEntityName);
     }
 
     private function buildUpdateQuery(AbstractAccumTotal $accum, bool $decrement = false)

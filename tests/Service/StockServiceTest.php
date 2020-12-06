@@ -36,19 +36,18 @@ class StockServiceTest extends KernelTestCase
     {
         $this->getTestCollection();
 
-        $stockService = new StockService(self::$entityManager, Stock::class, StockTotal::class);
+        $stockService = new StockService(self::$entityManager);
         $stockService->setRecorder($this->invoice);
         $stockService->save($this->collection);
 
         $this->assertTrue(true);
     }
 
-
     public function testClear()
     {
         $this->getTestCollection();
 
-        $stockService = new StockService(self::$entityManager, Stock::class, StockTotal::class);
+        $stockService = new StockService(self::$entityManager);
         $stockService->setRecorder($this->invoice);
         $stockService->clear();
 
@@ -62,6 +61,7 @@ class StockServiceTest extends KernelTestCase
         $warehouse001 = self::$entityManager->getRepository(Warehouse::class)->find(1);
         $product001   = self::$entityManager->getRepository(Product::class)->find(1);
         $product002   = self::$entityManager->getRepository(Product::class)->find(2);
+        $product003   = self::$entityManager->getRepository(Product::class)->find(3);
 
         $this->collection = new StockAccumCollection();
 
@@ -89,6 +89,15 @@ class StockServiceTest extends KernelTestCase
         $stock->setWarehouse($warehouse001);
         $stock->setProduct($product002);
         $stock->setQuantity(3);
+
+        $this->collection->add($stock);
+
+        $stock = new Stock();
+        $stock->setPeriod(new \DateTime());
+        $stock->setCredit();
+        $stock->setWarehouse($warehouse001);
+        $stock->setProduct($product003);
+        $stock->setQuantity(4);
 
         $this->collection->add($stock);
     }

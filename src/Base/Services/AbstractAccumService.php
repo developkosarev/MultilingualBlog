@@ -50,7 +50,7 @@ abstract class AbstractAccumService
     {
         $items = $this->objectRepository->getRecords($this->recorder);
 
-        $collection = new StockAccumCollection();
+        $collection = new AbstractAccumCollection(); //StockAccumCollection();
 
         foreach ($items as $item) {
             $collection->add($item);
