@@ -2,7 +2,7 @@
 
 namespace App\Tests\AccumCollection;
 
-use App\AccumCollection\StockAccumCollection;
+use App\Base\AccumCollection\AbstractAccumCollection;
 use App\Entity\Accum\Stock;
 use App\Entity\Ref\Product\Product;
 use App\Entity\Ref\Warehouse\Warehouse;
@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 //https://habr.com/ru/post/518242/
 
-class StockAccumCollectionTest extends KernelTestCase
+class AbstractAccumCollectionTest extends KernelTestCase
 {
     public function testTotalOneItemAccumCollection(): void
     {
@@ -23,7 +23,7 @@ class StockAccumCollectionTest extends KernelTestCase
         $product002 = new Product();
         $product002->setId(2);
 
-        $stockAccumCollection = new StockAccumCollection();
+        $stockAccumCollection = new AbstractAccumCollection();
 
         $stock = new Stock();
         $stock->setPeriod(new \DateTime());
@@ -60,7 +60,7 @@ class StockAccumCollectionTest extends KernelTestCase
         $product002 = new Product();
         $product002->setId(2);
 
-        $stockAccumCollection = new StockAccumCollection();
+        $stockAccumCollection = new AbstractAccumCollection();
 
         $stock = new Stock();
         $stock->setPeriod(new \DateTime());

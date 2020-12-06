@@ -2,9 +2,8 @@
 
 namespace App\Tests\Service;
 
-use App\AccumCollection\StockAccumCollection;
+use App\Base\AccumCollection\AbstractAccumCollection;
 use App\Entity\Accum\Stock;
-use App\Entity\Accum\StockTotal;
 use App\Entity\Doc\Invoice\Invoice;
 use App\Entity\Ref\Product\Product;
 use App\Entity\Ref\Warehouse\Warehouse;
@@ -63,7 +62,7 @@ class StockServiceTest extends KernelTestCase
         $product002   = self::$entityManager->getRepository(Product::class)->find(2);
         $product003   = self::$entityManager->getRepository(Product::class)->find(3);
 
-        $this->collection = new StockAccumCollection();
+        $this->collection = new AbstractAccumCollection();
 
         $stock = new Stock();
         $stock->setPeriod(new \DateTime());

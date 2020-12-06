@@ -2,7 +2,7 @@
 
 namespace App\Tests\Service;
 
-use App\AccumCollection\CostAccumCollection;
+use App\Base\AccumCollection\AbstractAccumCollection;
 use App\Entity\Accum\Cost;
 use App\Entity\Doc\Invoice\Invoice;
 use App\Entity\Ref\Product\Product;
@@ -59,7 +59,7 @@ class CostServiceTest extends KernelTestCase
         $product001   = self::$entityManager->getRepository(Product::class)->find(1);
         $product002   = self::$entityManager->getRepository(Product::class)->find(2);
 
-        $this->collection = new CostAccumCollection();
+        $this->collection = new AbstractAccumCollection();
 
         $cost = new Cost();
         $cost->setPeriod(new \DateTime());
