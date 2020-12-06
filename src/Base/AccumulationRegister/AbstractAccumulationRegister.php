@@ -7,11 +7,24 @@ namespace App\Base\AccumulationRegister;
 
 abstract class AbstractAccumulationRegister
 {
+    #region Fields
+
     protected $entityNameRecord;
 
     protected $entityNameTotal;
 
     protected $recordCollection;
+
+    #endregion
+
+    #region Constructor
+
+    public function __construct(AccumulationEntityRecordInterface $record, AccumulationEntityTotalInterface $total)
+    {
+
+    }
+
+    #endregion
 
     abstract public function getDimensions(): array;
 
