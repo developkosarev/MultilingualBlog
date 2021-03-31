@@ -34,3 +34,13 @@ Test users:
 admin@example.com  pwd: admin@2020  
 manager@example.com  pwd: manager@2020  
 user@example.com  pwd: user@2020  
+
+Unit Tests:
+-----
+
+```bash
+$ php bin/console doctrine:fixtures:load --env=test
+
+$ ./vendor/bin/phpunit --configuration phpunit.xml.dist --colors --verbose --testdox
+$ ./vendor/bin/phpunit --configuration phpunit.xml.dist --colors --verbose App\Tests\AccumCollection\AbstractAccumCollection tests/AccumCollection/AbstractAccumCollectionTest.php
+```
