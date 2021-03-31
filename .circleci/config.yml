@@ -7,7 +7,7 @@ jobs:
   build:
     #working_directory: ~/lic
     docker:
-      - image: circleci/php:7.2-apache-node-browsers
+      - image: circleci/php:7.4-apache-node-browsers
         enviroment:
           APP_ENV: test
           DATABASE_URL: mysql://root:@127.0.0.1:3306/symfony002blog?serverVersion=5.7
