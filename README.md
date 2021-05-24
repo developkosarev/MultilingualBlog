@@ -43,4 +43,6 @@ $ php bin/console doctrine:fixtures:load --env=test
 
 $ ./vendor/bin/phpunit --configuration phpunit.xml.dist --colors --verbose --testdox
 $ ./vendor/bin/phpunit --configuration phpunit.xml.dist --colors --verbose App\Tests\AccumCollection\AbstractAccumCollection tests/AccumCollection/AbstractAccumCollectionTest.php
+$ ./vendor/bin/phpunit --configuration phpunit.xml.dist --colors --verbose App\Tests\Document\InvoiceDocument tests/Document/InvoiceDocumentTest.php
+$ ./vendor/bin/phpunit --configuration phpunit.xml.dist --colors --verbose  --testdox App\Tests\Document\OrderDocument tests/Document/OrderDocumentTest.php
 ```

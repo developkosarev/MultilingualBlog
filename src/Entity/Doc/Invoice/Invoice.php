@@ -9,7 +9,7 @@ use App\Entity\Base\BaseDoc;
 
 /**
  * @Entity
- * @ORM\Entity(repositoryClass="App\Repository\InvoiceRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\Doc\InvoiceRepository")
  * @ORM\Table(name="doc_invoice")
  */
 class Invoice extends BaseDoc

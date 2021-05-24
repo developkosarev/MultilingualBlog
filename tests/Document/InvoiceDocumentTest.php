@@ -2,7 +2,7 @@
 
 namespace App\Tests\Document;
 
-use App\Document\InvoiceDocument;
+//use App\Document\InvoiceDocument;
 use App\Entity\Doc\Invoice\Invoice;
 
 use Doctrine\ORM\EntityManager;
@@ -39,7 +39,10 @@ class InvoiceDocumentTest extends KernelTestCase
         //    ->getRepository(Invoice::class)
         //    ->find($invoice->getId());
 
+        //$repository = $this->entityManager->getRepository(Invoice::class);
+
         //$this->assertSame(1, $invoice->getVersion());
+
         $this->assertSame(1, 1);
     }
 

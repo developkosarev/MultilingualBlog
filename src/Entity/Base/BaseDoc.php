@@ -2,19 +2,20 @@
 
 namespace App\Entity\Base;
 
+use App\Base\Interfaces\DocumentInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\MappedSuperclass
  */
-abstract class BaseDoc extends AbstractRef
+abstract class BaseDoc extends AbstractRef implements DocumentInterface
 {
     /**
      * @var \DateTime
      *
      * @ORM\Column(type="datetime", nullable=false)
      */
-    private $date;
+    protected $date;
 
     public function __construct()
     {

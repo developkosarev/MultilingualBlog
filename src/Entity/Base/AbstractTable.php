@@ -19,7 +19,7 @@ abstract class AbstractTable
     /**
      * @var AbstractRef
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Base\BaseRef")
+     * @ORM\ManyToOne(targetEntity="App\Base\Entity\BaseRef")
      * @ORM\JoinColumn(name="owner", nullable=false)
      */
     protected $owner;

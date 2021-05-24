@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Test!{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Test invoice</h1>
+    {{ dump(invoice) }}
+    <h2>Table</h2>
+    {% for item in invoice.invoiceProducts %}
+        {{ dump(item) }}
+
+        <div>{{ item.lineNo }}</div>
+        <div>{{ item.product.name }}</div>
+
+    {% else %}
+        <div>Empty</div>
+    {% endfor %}
+
+</div>
+{% endblock %}

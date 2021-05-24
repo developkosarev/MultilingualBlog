@@ -3,12 +3,10 @@
 namespace App\Tests\Repository;
 
 use App\Entity\Doc\Invoice\Invoice;
-
 use App\Entity\Doc\Invoice\InvoiceProduct;
 use App\Entity\Ref\Product\Product;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-
 
 class InvoiceRepositoryTest extends KernelTestCase
 {

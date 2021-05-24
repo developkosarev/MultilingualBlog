@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Base\RepositoryFactory\CustomRepositoryFactory;
 use App\Base\Services\CodeGeneratorDefault;
 use App\Entity\Doc\Invoice\Invoice;
+use App\Service\Doc\InvoiceService;
 use Doctrine\ORM\Repository\RepositoryFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -57,6 +58,24 @@ class DefaultController extends AbstractController
             'default/test.html.twig',
             [
                 'factory' => $this->factory
+            ]
+        );
+    }
+
+    /**
+     * @Route({
+     *   "en": "/test-invoice" ,
+     *   "de": "/test-invoice"
+     * }, name="test-invoice")
+     */
+    public function testInvoice(InvoiceService $invoiceService)
+    {
+        $invoice = $invoiceService->get(131);
+
+        return $this->render(
+            'default/test-invoice.html.twig',
+            [
+                'invoice' => $invoice
             ]
         );
     }

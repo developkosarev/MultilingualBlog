@@ -34,4 +34,4 @@ doctrine:
                 prefix: Gedmo\Tree\Entity
                 dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
 
-        #repository_factory: App\Base\RepositoryFactory\CustomRepositoryFactory
+        #repository_factory: App\Base\RepositoryFactory\CustomRepositoryFactory        

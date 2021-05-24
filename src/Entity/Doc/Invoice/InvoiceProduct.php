@@ -1,14 +1,11 @@
 <?php
 
-
 namespace App\Entity\Doc\Invoice;
-
 
 use App\Entity\Base\AbstractTable;
 use App\Entity\Ref\Product\Product;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Entity;
-
 
 /**
  * @Entity

@@ -2,6 +2,7 @@
 
 namespace App\Entity\Base;
 
+use App\Base\Interfaces\ReferenceInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -9,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\MappedSuperclass
  */
-abstract class BaseRef extends AbstractRef
+abstract class BaseRef extends AbstractRef implements ReferenceInterface
 {
     /**
      * @ORM\Column(name="name", type="string", length=50, nullable=false)

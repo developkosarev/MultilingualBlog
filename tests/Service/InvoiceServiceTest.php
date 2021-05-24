@@ -3,8 +3,10 @@
 namespace App\Tests\Service;
 
 use App\Entity\Doc\Invoice\Invoice;
-use App\Service\InvoiceService;
-
+use App\Entity\Doc\Invoice\InvoiceProduct;
+use App\Entity\Ref\Product\Product;
+use App\Repository\ProductRepository;
+use App\Service\Doc\InvoiceService;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -24,26 +26,55 @@ class InvoiceServiceTest extends KernelTestCase
             ->getManager();
     }
 
-    public function testSomething()
-    {
-        //$invoiceService = new InvoiceService();
-        //$result = $invoiceService->Save();
-
-        $this->assertTrue(true);
-    }
-
     public function testSaveInvoice()
     {
-        //$invoice = new Invoice();
-        //$this->entityManager->persist($invoice);
-        //$this->entityManager->flush();
+        $invoiceRepository = $this->entityManager->getRepository(Invoice::class);
 
-        //$invoice = $this->entityManager
-        //    ->getRepository(Invoice::class)
-        //    ->find($invoice->getId());
+        $invoice = new Invoice();
 
-        //$this->assertSame(1, $invoice->getVersion());
-        $this->assertTrue(true);
+        $invoiceService = new InvoiceService($invoiceRepository);
+        $invoiceService->save($invoice);
+
+        $invoiceResult = $invoiceRepository->find($invoice->getId());
+
+        $this->assertSame(1, $invoiceResult->getVersion());
+    }
+
+    public function testDoubleSaveInvoice()
+    {
+        $invoiceRepository = $this->entityManager->getRepository(Invoice::class);
+
+        $invoice = new Invoice();
+
+        $invoiceService = new InvoiceService($invoiceRepository);
+        $invoiceService->save($invoice);
+
+        $invoice->setMarked(true);
+        $invoiceService->save($invoice);
+
+        $this->assertSame(2, $invoice->getVersion());
+    }
+
+    public function testSaveTableProduct()
+    {
+        $invoiceRepository = $this->entityManager->getRepository(Invoice::class);
+        $invoiceService = new InvoiceService($invoiceRepository);
+
+        $productRepository = $this->entityManager->getRepository(Product::class);
+        $product = $productRepository->findOneByName('Product 001');
+
+        $invoice = new Invoice();
+
+        $invoiceProduct = new InvoiceProduct();
+        $invoiceProduct->setProduct($product);
+        $invoiceProduct->setQuantity(2);
+        $invoiceProduct->setPrice(10);
+        $invoice->addInvoiceProducts($invoiceProduct);
+
+        $invoiceService->saveDocument($invoice);
+
+        $this->assertSame(20.0, $invoice->getTotalSum());
+        //$this->assertTrue(true);
     }
 
     protected function tearDown(): void
