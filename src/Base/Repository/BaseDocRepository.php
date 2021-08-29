@@ -22,11 +22,9 @@ class BaseDocRepository extends ServiceEntityRepository implements DocumentRepos
         return $this->find($id);
     }
 
-
-    public function save(DocumentInterface $document): DocumentInterface
+    public function add(DocumentInterface $document): DocumentInterface
     {
         $this->_em->persist($document);
-        $this->_em->flush();
 
         return $document;
     }
@@ -34,6 +32,11 @@ class BaseDocRepository extends ServiceEntityRepository implements DocumentRepos
     public function delete(DocumentInterface $document): void
     {
         // TODO: Implement delete() method.
+    }
+
+    public function save(): void
+    {
+        $this->_em->flush();
     }
 }
 

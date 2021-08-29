@@ -47,3 +47,16 @@ services:
 
     App\Base\Interfaces\CodeGeneratorInterface: '@app.code.generator.default'
     #endregion
+
+    Aws\S3\S3Client:
+        arguments:
+            - version: '2006-03-01'
+              region: '%env(AWS_DEFAULT_REGION)%'
+              credentials:
+                  key: '%env(AWS_ACCESS_KEY_ID)%'
+                  secret: '%env(AWS_SECRET_ACCESS_KEY)%'
+
+    #app.repository.factory:
+    #    class: App\Base\RepositoryFactory\CustomRepositoryFactory
+    #
+    #App\Base\RepositoryFactory\CustomRepositoryFactory: '@app.repository.factory'

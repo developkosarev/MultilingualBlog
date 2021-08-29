@@ -2,13 +2,16 @@
 
 namespace App\Tests\Repository;
 
+use App\Entity\BlogPost;
 use App\Entity\Doc\Invoice\Invoice;
 use App\Entity\Doc\Invoice\InvoiceProduct;
 use App\Entity\Ref\Product\Product;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
+use Happyr\DoctrineSpecification\Repository\EntitySpecificationRepository;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class InvoiceRepositoryTest extends KernelTestCase
+class BlogPostTest extends KernelTestCase
 {
     /**
      * @var EntityManager
@@ -26,25 +29,11 @@ class InvoiceRepositoryTest extends KernelTestCase
 
     public function testSave(): void
     {
-        $invoiceRepository = $this->entityManager->getRepository(Invoice::class);
-        $productRepository = $this->entityManager->getRepository(Product::class);
+        $repository = $this->entityManager->getRepository(BlogPost::class);
 
-        $product = $productRepository->findOneByName('Product 001');
-
-        $invoice = new Invoice();
-        $invoiceProduct = new InvoiceProduct();
-
-        $invoiceProduct->setProduct($product);
-        $invoiceProduct->setQuantity(1);
-        $invoiceProduct->setPrice(10);
-
-        $invoice->addInvoiceProducts($invoiceProduct);
-
-        $invoiceRepository->add($invoice);
-
-        $this->entityManager->flush();
-
-        $this->assertSame(1, $invoice->getVersion());
+        $this->assertSame(1, 1);
+        $this->assertInstanceOf(EntityRepository::class, $repository);
+        //$this->assertInstanceOf(EntitySpecificationRepository::class, $repository);
     }
 
     protected function tearDown(): void

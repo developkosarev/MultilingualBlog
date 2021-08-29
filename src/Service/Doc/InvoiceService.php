@@ -13,13 +13,13 @@ class InvoiceService extends AbstractDocumentService
         $this->repository = $repository;
     }
 
-    public function saveDocument(Invoice $invoice)
+    public function addDocument(Invoice $invoice)
     {
         $invoice->setTotalSum(0);
         foreach ($invoice->getInvoiceProducts() as $item) {
             $invoice->setTotalSum($invoice->getTotalSum() + $item->getSum());
         }
 
-        $this->save($invoice);
+        $this->add($invoice);
     }
 }

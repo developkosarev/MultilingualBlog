@@ -3,7 +3,8 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-import Home from './components/Home.vue'
+import Home from './pages/Home.vue'
+import Chart from "./pages/Chart.vue";
 import NotFound from './components/NotFound.vue'
 import LoginForm from './components/auth/LoginForm.vue'
 import PostList from './components/PostList.vue'
@@ -14,6 +15,8 @@ import PostEditForm from './components/dashboard/PostEditForm.vue'
 const routes = [
     { path: '/', name: 'root', component: Home },
     { path: '/login', name: 'login', component: LoginForm},
+
+    { path: '/chart', name: 'chart', component: Chart },
 
     { path: '/blog', name: 'blog', component: PostList, meta: { requiresAuth: true, role: "Users" }},
     { path: '/blog/:slug', name: 'post', component: PostShow, meta: { requiresAuth: true, role: "Users" }},

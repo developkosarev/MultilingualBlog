@@ -30,14 +30,19 @@ abstract class AbstractDocumentService implements DocumentServiceInterface
         return $this->repository->getById($id);
     }
 
-    public function save(DocumentInterface $document): DocumentInterface
+    public function add(DocumentInterface $document): DocumentInterface
     {
-        return $this->repository->save($document);
+        return $this->repository->add($document);
     }
 
     public function delete(DocumentInterface $document): void
     {
         // TODO: Implement delete() method.
+    }
+
+    public function save(): void
+    {
+        $this->repository->save();
     }
 
     #endregion

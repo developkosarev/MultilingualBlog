@@ -33,7 +33,9 @@ class InvoiceServiceTest extends KernelTestCase
         $invoice = new Invoice();
 
         $invoiceService = new InvoiceService($invoiceRepository);
-        $invoiceService->save($invoice);
+        $invoiceService->add($invoice);
+
+        $this->entityManager->flush();
 
         $invoiceResult = $invoiceRepository->find($invoice->getId());
 
@@ -47,10 +49,14 @@ class InvoiceServiceTest extends KernelTestCase
         $invoice = new Invoice();
 
         $invoiceService = new InvoiceService($invoiceRepository);
-        $invoiceService->save($invoice);
+        $invoiceService->add($invoice);
+
+        $this->entityManager->flush();
 
         $invoice->setMarked(true);
-        $invoiceService->save($invoice);
+        $invoiceService->add($invoice);
+
+        $this->entityManager->flush();
 
         $this->assertSame(2, $invoice->getVersion());
     }
@@ -71,7 +77,9 @@ class InvoiceServiceTest extends KernelTestCase
         $invoiceProduct->setPrice(10);
         $invoice->addInvoiceProducts($invoiceProduct);
 
-        $invoiceService->saveDocument($invoice);
+        $invoiceService->addDocument($invoice);
+
+        $this->entityManager->flush();
 
         $this->assertSame(20.0, $invoice->getTotalSum());
         //$this->assertTrue(true);
